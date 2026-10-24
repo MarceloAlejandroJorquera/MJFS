@@ -1,0 +1,61 @@
+name: MJFS v1.1 Draft Release
+
+on:
+  push:
+    tags:
+      - 'v1.1'
+
+permissions:
+  contents: write
+
+jobs:
+  create-draft:
+    if: github.repository == 'MarceloAlejandroJorquera/MJFS'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout tagged documentation
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Create or verify v1.1 draft (no assets)
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const tag = 'v1.1';
+            const { owner, repo } = context.repo;
+            if (context.ref !== 'refs/tags/v1.1') {
+              core.setFailed('Unexpected tag reference');
+              return;
+            }
+            const body = fs.readFileSync('docs/RELEASE_NOTES_v1.1.md', 'utf8');
+            if (!body.includes('MJFSv1.1.zip') || !body.includes('SHA-256')) {
+              core.setFailed('Missing verified ZIP release notes');
+              return;
+            }
+            let previous = null;
+            try {
+              previous = (await github.rest.repos.getReleaseByTag({owner, repo, tag})).data;
+            } catch (error) {
+              if (error.status !== 404) throw error;
+            }
+            if (previous) {
+              if (!previous.draft) {
+                core.notice('v1.1 is already published; leaving it unchanged.');
+                return;
+              }
+              if (previous.assets.length) {
+                core.notice('Draft contains assets; leaving notes and assets unchanged.');
+                return;
+              }
+              const result = await github.rest.repos.updateRelease({
+                owner, repo, release_id: previous.id, name: 'MJFS v1.1', body, draft: true
+              });
+              core.notice('Draft metadata refreshed: ' + result.data.html_url);
+            } else {
+              const result = await github.rest.repos.createRelease({
+                owner, repo, tag_name: tag, name: 'MJFS v1.1',
+                body, draft: true, prerelease: false, generate_release_notes: false
+              });
+              core.notice('Draft release created: ' + result.data.html_url);
+            }

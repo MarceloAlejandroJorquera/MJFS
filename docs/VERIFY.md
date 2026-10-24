@@ -1,27 +1,25 @@
-# Verify MJFS v1
+# Verify MJFS v1.1
 
-Download only [`MJFSv1.zip`](https://github.com/MarceloAlejandroJorquera/MJFS/releases/tag/v1) from the GitHub release. The archive must contain exactly two root-level files:
+Get `MJFSv1.1.zip` from the official [v1.1 release](https://github.com/MarceloAlejandroJorquera/MJFS/releases/tag/v1.1). It must contain exactly these two root-level files, without directories, extra members, or duplicate names:
 
 ```text
-MJFSv1.exe
+MJFSv1.1.exe
 SHA256SUMS.txt
 ```
 
-Extract both files to an empty directory, then run Windows PowerShell 5.1:
+After extracting to an empty directory, run Windows PowerShell 5.1:
 
 ```powershell
 $lines = @(Get-Content -LiteralPath .\SHA256SUMS.txt)
-if ($lines.Count -ne 1 -or $lines[0] -cnotmatch '^[0-9a-f]{64}  MJFSv1\.exe$') {
-    throw 'Checksum file is malformed'
+if ($lines.Count -ne 1 -or $lines[0] -cnotmatch '^[0-9a-f]{64}  MJFSv1\.1\.exe$') {
+    throw 'Invalid checksum manifest'
 }
 $expected = $lines[0].Substring(0,64)
-$actual = (Get-FileHash -LiteralPath .\MJFSv1.exe -Algorithm SHA256).Hash.ToLowerInvariant()
-if ($actual -cne $expected) { throw 'MJFSv1.exe SHA256 mismatch' }
-Write-Host 'MJFSv1.exe SHA256 PASS'
+$actual = (Get-FileHash -LiteralPath .\MJFSv1.1.exe -Algorithm SHA256).Hash.ToLowerInvariant()
+if ($actual -cne $expected) { throw 'EXE SHA256 mismatch' }
+Write-Host 'MJFSv1.1.exe SHA256 PASS'
 ```
 
-Verify the extraction list as well: reject unexpected extra files, subdirectories or duplicate entries. The publication tool's `-Mode Verify` independently validates archive structure, SHA-256 and PE32+ AMD64 format.
+For the complete archive-member check, the private release tool's `VerifyZip` mode opens the actual ZIP, rejects extra entries and validates the embedded manifest against the embedded EXE. The binary also must be PE32+ AMD64 and its embedded broker resource must match the private build-time intermediate.
 
-**Note:** there is deliberately no ZIP self-hash inside the archive. A ZIP cannot include a stable SHA-256 of itself without a circular dependency. The publisher saves the ZIP SHA-256 separately in a local audit manifest but uploads only `MJFSv1.zip`.
-
-SHA-256 checks are for corruption detection and do not independently authenticate the GitHub publisher account.
+The ZIP cannot contain its own cryptographic hash without a circular dependency. The local release audit saves the archive SHA-256 separately; it is not a second published GitHub release asset. SHA-256 detects modification but does not, by itself, authenticate the publisher.

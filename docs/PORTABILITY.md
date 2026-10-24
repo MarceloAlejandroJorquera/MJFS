@@ -1,11 +1,12 @@
-# Portability and filesystem behavior
+# MJFS v1.1 portability and filesystem behavior
 
-MJFS v1 is targeted at x64 Windows and uses runtime discovery of accessible storage. Volumes, device identities, catalog paths and USN cursors are not intended to be tied to the development host.
+MJFS v1.1 targets supported x64 Windows hosts and discovers accessible volumes and devices at runtime. Do not assume a particular drive letter, volume serial, USN cursor, machine path, CPU instruction extension or device configuration.
 
-- **NTFS:** journal-based changes require sufficient privileges and volume support; runtime capability/permission checks and appropriate fallback behavior are essential.
-- **FAT32:** volume scans and refresh behavior differ from NTFS/USN processing.
-- **WPD/MTP:** device contents are enumerated through Windows portable-device and Shell interfaces and may be dependent on user approval/unlock, connection state and device metadata. No filesystem-letter assumption should be made.
-- **CPU:** any AVX2-specific code must be gated at runtime; non-AVX2 x64 hosts require a safe baseline code path.
-- **Performance:** indexing and sort performance depend on the volume and host, and should not be represented by a single-machine benchmark.
+- **NTFS:** USN updates require volume support and appropriate permissions. The application must check capabilities and handle denial/unavailable journal paths safely.
+- **FAT32:** enumeration and refresh are distinct from NTFS journal processing.
+- **WPD/MTP:** enumeration is device- and permission-dependent, and results are snapshots rather than USN-live records.
+- **CPU:** hardware-specific accelerated paths require runtime detection and a safe x64 baseline fallback.
+- **Service:** the single distributed GUI EXE embeds a service broker payload. Explicit service management installs the separate running image into protected ProgramData storage, subject to privileges and Windows SCM rules.
+- **Performance:** throughput, indexing, and sorting vary with host and storage conditions. One-machine benchmarks are not cross-host certification.
 
-Actual operating-system compatibility, first-run permissions and heterogeneous-device behavior should be regression-tested on multiple machines before making broad portability guarantees.
+Before broad portability claims, test on independent Windows hosts with differing filesystem layouts, storage speeds, permissions, and CPU capabilities.

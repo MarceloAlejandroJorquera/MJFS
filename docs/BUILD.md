@@ -1,30 +1,24 @@
-# Building MJFS v1
+# Building MJFS v1.1
 
 ## Requirements
 
-- Windows x64, Visual Studio Build Tools with MSVC C++ x64 compiler and Windows SDK.
-- CMake and Ninja on PATH.
-- Windows PowerShell **5.1** for build and release scripts.
-- A complete, authorized private source checkout, including Win32 resources and the embedded UI font.
+Windows x64, Visual Studio Build Tools (MSVC x64 and Windows SDK), CMake and Ninja on PATH, Windows PowerShell 5.1, and the complete authorized private project checkout including embedded resource inputs.
 
-## Build
+## Qualified Release build
 
-In the production checkout:
+Run from the private `MJFS\v1.1` project root:
 
 ```powershell
-.\MJFS-PORTABLE-P9NP.cmd Verify
-.\MJFS-PORTABLE-P9NP.cmd BuildTests
-.\MJFS-PORTABLE-P9NP.cmd BuildRelease
+.\MJFS-P9NZ.cmd Verify
+.\MJFS-P9NZ.cmd SelfTest
+.\MJFS-P9NZ.cmd BuildTests
+.\MJFS-P9NZ.cmd BuildRelease
 ```
 
-The canonical production command is `BUILD-RELEASE.cmd`. Expected output is `dist\MJFSv1.exe`.
+The output is `dist\MJFSv1.1.exe`. The broker is compiled privately to `out\build-release\broker-payload\MJFSv1.1Broker.exe`, embedded as `RT_RCDATA 102` and compared byte-for-byte with the resource in the GUI. The installed service image remains under protected ProgramData storage, and is not a separate distribution asset.
 
-**Do not publish** patch ZIPs, synthetic test executables or a previously built binary in place of a verified current Release build.
+## Release ZIP and publication
 
-## GitHub publication
+The version-specific release command `MJFS-V11-RELEASE.cmd` validates the native resource identity test and creates `dist\MJFSv1.1.zip` with exactly `MJFSv1.1.exe` and `SHA256SUMS.txt`. `VerifyZip` recomputes checksums from the actual ZIP member bytes. It records the ZIP's own checksum locally under `out\release-v11`.
 
-Repository: <https://github.com/MarceloAlejandroJorquera/MJFS>
-
-The repository's publisher is `PUBLISH-MJFSv1.cmd`, backed by `tools/publish/Publish-MJFSv1.ps1`. Packaging produces one release asset, `MJFSv1.zip`, holding `MJFSv1.exe` and `SHA256SUMS.txt`. The archive hash and build metadata are kept in a **local-only** `RELEASE-MANIFEST.json` and are not uploaded as separate assets.
-
-See `PUBLICATION-GUIDE.md` in the downloadable publication kit for initial clone, staging and release commands.
+Only the public documentation is pushed to `main`. Upload **one** asset, `MJFSv1.1.zip`, manually on the [v1.1 GitHub release](https://github.com/MarceloAlejandroJorquera/MJFS/releases/tag/v1.1). Neither the broker intermediate nor tests, logs, local indexes, service image, or source patch archives should be uploaded.
