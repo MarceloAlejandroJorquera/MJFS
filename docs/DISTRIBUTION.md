@@ -4,6 +4,6 @@ The **only GitHub Release asset** is `MJFSv1.zip`, containing `MJFSv1.exe` and `
 
 The executable build embeds a UI font resource. Before publishing, verify licensing and notices for all embedded fonts, assets and third-party components. Do not separately distribute font files in the release ZIP.
 
-This kit does **not** grant a source-code license. If you later publish source, review ownership and licensing obligations and add an appropriate LICENSE file explicitly. The public documentation-only repository does not provide the private build source.
+MJFS v1 is distributed under the [MJFS Binary Distribution License](../LICENSE), which permits use of official unmodified releases but does not grant redistribution or modification rights. The private C++ source code is not published. Third-party materials may have separate license requirements.
 
 The release publisher uses Git for repository changes and native PowerShell GitHub REST API calls for GitHub release creation; it has no GitHub CLI dependency. Use `-Mode Push` if you prefer uploading the ZIP through the website.

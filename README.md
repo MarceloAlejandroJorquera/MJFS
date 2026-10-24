@@ -77,4 +77,8 @@ When reporting a reproducible issue, include the MJFS version, Windows version, 
 
 ## License and distribution
 
-See [distribution notices](docs/DISTRIBUTION.md). No new source-code license is granted by this README.
+MJFS v1 is distributed under the [MJFS Binary Distribution License](LICENSE).
+The official executable may be installed and run, but redistribution or
+modification is not licensed without permission. The private C++ source code
+is not published. Refer to [distribution notices](docs/DISTRIBUTION.md) for
+embedded third-party materials and their separate license requirements.

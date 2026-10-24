@@ -1,0 +1,31 @@
+MJFS v1 Binary Distribution License
+
+Copyright (c) 2026 Marcelo Alejandro Jorquera. All rights reserved.
+
+1. PERMITTED USE
+The copyright holder grants you a non-exclusive, royalty-free license to
+install and run unmodified, official MJFS v1 binary releases for personal or
+commercial use on Windows computers.
+
+2. RESERVATION OF RIGHTS
+No permission is granted to modify, redistribute, sell, sublicense, or create
+derivative works of the executable or distribute modified builds. All rights
+not expressly granted are reserved by the copyright holder, subject to rights
+that cannot be restricted under applicable law.
+
+3. SOURCE CODE
+This license does not provide access to, or a license to redistribute, the
+private application source code. The public repository contains documentation
+and publication tooling, not the application's complete native source.
+
+4. THIRD-PARTY MATERIALS
+Embedded fonts, libraries, and other third-party materials may carry separate
+license conditions. Applicable third-party rights and obligations are not
+superseded by this license.
+
+5. WARRANTY DISCLAIMER
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE SOFTWARE IS PROVIDED
+"AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+THE COPYRIGHT HOLDER SHALL NOT BE LIABLE FOR DAMAGES ARISING FROM USE OF THE
+SOFTWARE TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW.
