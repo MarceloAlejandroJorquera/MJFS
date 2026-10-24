@@ -1,0 +1,5 @@
+# MJFS publishing/build helper scripts are not the native C++ application source.
+*.ps1 -linguist-detectable
+*.psm1 -linguist-detectable
+*.cmd -linguist-detectable
+*.bat -linguist-detectable

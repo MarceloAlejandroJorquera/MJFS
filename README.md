@@ -2,7 +2,12 @@
 
 **Fast native file discovery for Windows x64.** MJFS combines a compact, keyboard-friendly Win32 interface with indexed volume searching, live filesystem integration where available, and rich metadata filtering.
 
-![Version v1](assets/badges/version.svg) ![Windows x64](assets/badges/platform.svg) ![Portable EXE](assets/badges/distribution.svg) ![NTFS FAT32 WPD](assets/badges/filetypes.svg)
+<p align="center">
+  <img src="assets/badges/version.svg" alt="MJFS v1" />
+  <img src="assets/badges/platform.svg" alt="Windows x64" />
+  <img src="assets/badges/distribution.svg" alt="Portable EXE" />
+  <img src="assets/badges/filetypes.svg" alt="NTFS, FAT32 and WPD/MTP" />
+</p>
 
 ## Screenshots
 
