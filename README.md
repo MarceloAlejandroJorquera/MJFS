@@ -2,7 +2,12 @@
 
 **Native file discovery and search for Windows x64.** MJFS combines a compact Win32 interface with indexed volume searching, change tracking where supported, and metadata filtering.
 
-![Version v1.1](assets/badges/version.svg) ![Windows x64](assets/badges/platform.svg) ![Portable EXE](assets/badges/distribution.svg) ![NTFS FAT32 WPD](assets/badges/filetypes.svg)
+<p align="center">
+  <a href="https://github.com/MarceloAlejandroJorquera/MJFS/releases/latest"><img src="assets/badges/version.svg" alt="Version v1.1"></a>
+  <a href="docs/BUILD.md"><img src="assets/badges/platform.svg" alt="Windows x64"></a>
+  <a href="docs/DISTRIBUTION_v1.1.md"><img src="assets/badges/distribution.svg" alt="Portable EXE"></a>
+  <a href="docs/PORTABILITY.md"><img src="assets/badges/filetypes.svg" alt="NTFS, FAT32 and WPD"></a>
+</p>
 
 ## Screenshots
 
