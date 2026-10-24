@@ -368,13 +368,13 @@ function Push-Documentation {
         }
         & git.exe diff --cached --quiet
         if ($LASTEXITCODE -eq 1) {
-            & git.exe commit -m 'docs: publish MJFS v1 public repository'
+            & git.exe commit -m 'docs: publish MJFS v1 public repository' | Out-Null
             if ($LASTEXITCODE -ne 0) { throw 'Git commit failed; check Git author configuration.' }
         } elseif ($LASTEXITCODE -ne 0) { throw 'Git index inspection failed.' }
         $savedPreference = $ErrorActionPreference
         try {
             $ErrorActionPreference = 'Continue'
-            & git.exe push -u origin ('HEAD:refs/heads/' + $ExpectedBranch)
+            & git.exe push -u origin ('HEAD:refs/heads/' + $ExpectedBranch) | Out-Null
             $exitCode = $LASTEXITCODE
         } finally { $ErrorActionPreference = $savedPreference }
         if ($exitCode -ne 0) { throw 'Git push failed; no Release upload was attempted.' }
