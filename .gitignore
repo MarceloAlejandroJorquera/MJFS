@@ -1,0 +1,16 @@
+# Build output and machine-specific state
+/out/
+/dist/
+/.vs/
+/build/
+/CMakeFiles/
+/CMakeCache.txt
+*.obj
+*.pdb
+*.ilk
+*.log
+*.tmp
+# Local publication output is never committed
+MJFSv1.zip
+RELEASE-MANIFEST.json
+SHA256SUMS.txt

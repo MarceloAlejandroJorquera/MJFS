@@ -1,0 +1,39 @@
+name: Bug report
+description: Report reproducible MJFS behavior
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: "Do not upload private filenames, index files, USN logs, device identifiers or other sensitive diagnostics."
+  - type: input
+    id: version
+    attributes:
+      label: MJFS version
+      placeholder: "v1"
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Windows edition/version and filesystem or device category
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
